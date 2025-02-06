@@ -35,8 +35,10 @@ struct CameraPreview: UIViewRepresentable {
         let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         
         // カメラデバイスの取得
-        guard let device = AVCaptureDevice.default(for: .video) else { return UIView() }
-        
+        guard let device = AVCaptureDevice.default(for: .video) else {
+            print("カメラデバイスが見つかりません")
+            return UIView() // クラッシュを防ぐために空のビューを返す
+        }
         // カメラ入力の設定
         do {
             let input = try AVCaptureDeviceInput(device: device)

@@ -42,6 +42,13 @@ struct ContentView: View {
     }
 }
 
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+            .previewInterfaceOrientation(.landscapeRight) // 横画面プレビュー
+    }
+}
+
 #Preview {
     ContentView()
 }
