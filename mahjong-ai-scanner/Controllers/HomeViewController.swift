@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeViewController.swift
 //  mahjong-ai-scanner
 //
 //  Created by 榎本康寿 on 2025/02/03.
@@ -9,7 +9,7 @@ import UIKit
 import CoreML
 import Vision
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let image = UIImage(named: "sample.jpg") else { return }
