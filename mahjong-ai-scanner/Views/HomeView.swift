@@ -13,29 +13,33 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack {
-            VStack(spacing: 20) {
-                Image("mahloung-image") // アセット名
+            ZStack {
+                // 背景画像
+                Image("mahloung-image")
                     .resizable()
-                    .scaledToFit()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                // カメラ起動画面への遷移
-                NavigationLink(destination: CameraView(navigateToRoot: navigateToRoot)) {
-                    Text("カメラ起動")
-                        .font(.title2)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
-                }
-                
-                // 多面待ちトレーニング画面への遷移
-                NavigationLink(destination: TrainingView(navigateToRoot: navigateToRoot)) {
-                    Text("多面待ちトレーニング")
-                        .font(.title2)
-                        .padding()
-                        .background(Color.green)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
+                    .scaledToFill() // 画面全体を埋める
+                    .ignoresSafeArea() // セーフエリア外も表示
+                VStack(spacing: 20) {
+                    NavigationLink(destination: CameraView(navigateToRoot: navigateToRoot)) {
+                        Text("カメラ起動")
+                            .font(.title2)
+                            .frame(width: 300, height: 50)
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                    }
+                    
+                    // トレーニング画面への遷移
+                    NavigationLink(destination: TrainingView(navigateToRoot: navigateToRoot)) {
+                        Text("トレーニング")
+                            .font(.title2)
+                            .frame(width: 300, height: 50)
+                            .padding()
+                            .background(Color.green)
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                    }
                 }
             }
             .navigationTitle("") // タイトルを空に設定
@@ -57,7 +61,8 @@ struct HomeView: View {
             }
             // モーダルの表示
             .sheet(isPresented: $showModal) {
-                CustomModalView(isPresented: $showModal, onConfirm: navigateToRoot) // カスタムモーダルビュー
+                // カスタムモーダルビュー
+                CustomModalView(isPresented: $showModal, onConfirm: navigateToRoot)
             }
         }
     }
