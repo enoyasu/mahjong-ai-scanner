@@ -8,10 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var isDebugMode = true
     @State private var navigateToHome = false // 遷移フラグ
+    
+    init() {
+        if isDebugMode {
+            print("Debugging mode is enabled")
+        }
+    }
     
     var body: some View {
         NavigationStack {
+            VStack {
+//                if isDebugMode {
+//                    Text("Debug Mode")
+//                        .foregroundColor(.red)
+//                } else {
+//                    Text("Normal Mode")
+//                        .foregroundColor(.blue)
+//                }
+//                
+//                Button(action: toggleMode) {
+//                    Text("Toggle Mode")
+//                }
+            }
             ZStack {
                 // 背景色を白に固定
                 Color.white
@@ -40,7 +60,13 @@ struct ContentView: View {
             }
         }
     }
+    func toggleMode() {
+        isDebugMode.toggle()
+        print("Toggled mode to \(isDebugMode ? "Debug" : "Normal")")
+    }
+
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
@@ -52,3 +78,5 @@ struct ContentView_Previews: PreviewProvider {
 #Preview {
     ContentView()
 }
+
+
