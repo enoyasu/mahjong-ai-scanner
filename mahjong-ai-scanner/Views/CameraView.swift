@@ -6,39 +6,79 @@
 //
 
 import SwiftUI
+import AVFoundation
 
+// カメラのアクセス権限状態を確認するための関数
+func checkCameraAuthorization() -> Bool {
+    let status = AVCaptureDevice.authorizationStatus(for: .video)
+    switch status {
+    case .authorized:
+        return true
+    case .notDetermined:
+        AVCaptureDevice.requestAccess(for: .video) { granted in
+            if granted {
+                print("カメラへのアクセスが許可されました")
+            } else {
+                print("カメラへのアクセスが拒否されました")
+            }
+        }
+        return false
+    default:
+        return false
+    }
+}
+
+// カメラプレビュー
+struct CameraPreview: UIViewRepresentable {
+    func makeUIView(context: Context) -> UIView {
+        let captureSession = AVCaptureSession()
+        let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        
+        // カメラデバイスの取得
+        guard let device = AVCaptureDevice.default(for: .video) else {
+            print("カメラデバイスが見つかりません")
+            return UIView() // クラッシュを防ぐために空のビューを返す
+        }
+        // カメラ入力の設定
+        do {
+            let input = try AVCaptureDeviceInput(device: device)
+            captureSession.addInput(input)
+        } catch {
+            print("カメラ入力の設定に失敗しました")
+            return UIView()
+        }
+        
+        // プレビューレイヤーの設定
+        previewLayer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        let view = UIView()
+        view.layer.addSublayer(previewLayer)
+        
+        // キャプチャセッションの開始
+        captureSession.startRunning()
+        
+        return view
+    }
+    
+    func updateUIView(_ uiView: UIView, context: Context) {}
+}
+
+// カメラビュー
 struct CameraView: View {
-    // Main画面に戻るためのクロージャ
     let navigateToRoot: () -> Void
-    // モーダル表示フラグ
-    @State private var showModal = false
+    
+    @State private var isCameraAuthorized = false
     
     var body: some View {
-        VStack(spacing: 20) {
-            Text("Camera Screen")
-                .font(.largeTitle)
-        }
-        .navigationTitle("") // タイトルを空に設定
-        // navigationTitleを設定しないことで、戻るボタンを「<」のみにする
-        .navigationBarBackButtonHidden(false) // デフォルトの戻るボタンを有効化
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                Text("") // 空のタイトルで戻るボタンを「<」だけにする
-            }
-            // 左上にカスタムボタンを配置（家アイコン）
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: {
-                    // モーダルを表示
-                    showModal = true
-                }) {
-                    Image(systemName: "house.fill") // 家のアイコン
-                        .font(.title)
-                }
+        Group {
+            if isCameraAuthorized {
+                CameraPreview()
+            } else {
+                Text("カメラへのアクセスが許可されていません")
             }
         }
-        // モーダルの表示
-        .sheet(isPresented: $showModal) {
-            CustomModalView(isPresented: $showModal, onConfirm: navigateToRoot)
+        .onAppear {
+            isCameraAuthorized = checkCameraAuthorization()
         }
     }
 }
+

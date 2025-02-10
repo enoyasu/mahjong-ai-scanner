@@ -29,9 +29,22 @@
 		B0AF61822D50809000D6C77F /* mahjong-ai-scannerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mahjong-ai-scannerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		B0DEDDC12D549B320077D8DF /* Exceptions for "mahjong-ai-scanner" folder in "mahjong-ai-scanner" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = B0AF61662D50808D00D6C77F /* mahjong-ai-scanner */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		B0AF61692D50808D00D6C77F /* mahjong-ai-scanner */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				B0DEDDC12D549B320077D8DF /* Exceptions for "mahjong-ai-scanner" folder in "mahjong-ai-scanner" target */,
+			);
 			path = "mahjong-ai-scanner";
 			sourceTree = "<group>";
 		};
@@ -395,6 +408,9 @@
 				DEVELOPMENT_TEAM = 4SBW8J6Y96;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "mahjong-ai-scanner/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "このアプリはカメラを使用します";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "このアプリは写真ライブラリを使用します";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -431,8 +447,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"mahjong-ai-scanner/Preview Content\"";
+				DEVELOPMENT_TEAM = 4SBW8J6Y96;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "mahjong-ai-scanner/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "このアプリはカメラを使用します";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "このアプリは写真ライブラリを使用します";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
